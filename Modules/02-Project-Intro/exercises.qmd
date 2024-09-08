@@ -39,6 +39,8 @@ Open an RStudio project through the file system
 
 <!-- Challenge 2 answer begin -->
 
+screenshot.png
+
 ![](screenshot.png)
 
 <!-- Challenge 2 answer end -->

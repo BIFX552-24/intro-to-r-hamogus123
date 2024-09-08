@@ -26,6 +26,12 @@ c(1, 2, 'f')
 
 <!-- Challenge 1 answer begin -->
 
+The first line of code represents a numeric vector
+
+The second line of code represents a character vector
+
+The third line of code represents a character vector
+
 Your answer goes here
 
 <!-- Challenge 1 answer end -->
@@ -36,7 +42,7 @@ Look at the help for the `paste` function. You will need to use it later. What's
 
 <!-- Challenge 2 answer begin -->
 
-Your answer goes here
+Sep is used to separate terms while collapse is used to separate the results into one string.
 
 <!-- Challenge 2 answer end -->
 
@@ -52,6 +58,6 @@ Use `??"read table"` to look up functions related to reading in tabular data.
 
 <!-- Challenge 3 answer begin -->
 
-Your answer goes here
+We can use `read.delim`
 
 <!-- Challenge 3 answer end -->
