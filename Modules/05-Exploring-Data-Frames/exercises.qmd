@@ -37,16 +37,17 @@ cats$weight <- as.numeric(cats$weight)
 cats$age <- c(2,3,5,1)
 
 # create human_age
-## your code goes here
+human_age <- cats$age * 7
 
 # convert human_age to a factor
-## your code goes here
+human_age <- as.factor(human_age)
 
 # convert human_age back to a numeric vector
-## your code goes here
+human_age <- as.character(human_age)
+human_age <- as.numeric(as.character(human_age))
 ```
 
-Explanation: ...
+Explanation: To properly convert `human_age` back to a numeric vector, we need to first convert the factor into a character vector and then to a numeric.
 
 <!-- Challenge 1 answer end -->
 
@@ -72,13 +73,14 @@ Then use `rbind` to add an entry for someone you work with. Finally, use `cbind`
 
 ```{r}
 # create people
-people <- ## your code goes here ##
+people <- data.frame(first_name = "Hamere", last_name = "Mogus", lucky_number = 19)
   
 # add a team member
-## your code goes here ##
+people <- rbind(people,
+                data.frame(first_name = "Elias", last_name = "Alamirew", lucky_number = 16))
   
 # add coffee break
-## your code goes here ##
+people <- cbind(people, coffee_break = c(TRUE, FALSE))
   
 people
 ```
@@ -97,7 +99,12 @@ Searching for observations specifically in the middle isn't too hard, but we cou
 library(gapminder)
 data(gapminder)
 
-# your commands go here
+#Last few lines
+tail(gapminder)
+
+#Random(ish) rows
+set.seed(7345912)
+gapminder[sample(1:nrow(gapminder)), 6]
 ```
 
 <!-- Challenge 3 answer end -->
@@ -111,7 +118,7 @@ Run the script using the `source` function, using the file path as its argument.
 <!-- Challenge 4 answer begin -->
 
 ```{r}
-# load gapminder by sourcing your script here
+source("scripts/gapminder.R")
 ```
 
 <!-- Challenge 4 answer end -->
@@ -126,6 +133,6 @@ str(gapminder)
 
 <!-- Challenge 5 answer begin -->
 
-Explain the output of `str(gapminder)` here.
+The output of the data.frame we are working with can be explained as the following: the data frame has 1704 observations and 6 variables. country and continent are factors with 142 and 5 levels respectively. year and population are integers. lifeExp and gdpPercap are both numerical.
 
 <!-- Challenge 5 answer end -->
