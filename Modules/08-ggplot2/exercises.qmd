@@ -33,7 +33,7 @@ Modify the example so that the figure shows how life expectancy has changed over
 <!-- Challenge 1 answer begin -->
 
 ```{r}
-ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp)) + geom_point()
+ggplot(data = gapminder, mapping = aes(x = year, y = lifeExp)) + geom_point()
 ```
 
 <!-- Challenge 1 answer end -->
@@ -45,7 +45,8 @@ In the previous examples and challenge we've used the `aes` function to tell the
 <!-- Challenge 2 answer begin -->
 
 ```{r}
-# you code goes here
+ggplot(data = gapminder, mapping = aes(x = year, y = lifeExp, color = continent)) + 
+  geom_point()
 ```
 
 <!-- Challenge 2 answer end -->
@@ -66,7 +67,10 @@ Switch the order of the point and line layers from the previous example. What ha
 <!-- Challenge 3 answer begin -->
 
 ```{r}
-# Your code goes here
+ggplot(data = gapminder, mapping = aes(x=year, y=lifeExp, by=country)) +
+  geom_point(color = "grey40") +
+  geom_line(mapping = aes(color=continent)) + 
+  scale_color_manual(values = cbbPalette)
 ```
 
 <!-- Challenge 3 answer end -->
@@ -89,7 +93,10 @@ Hint: do not use the `aes` function.
 <!-- Challenge 4a answer begin -->
 
 ```{r}
-# Your code goes here
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(alpha = 0.4, color="green3", size=0.6) + 
+  scale_x_log10() +
+  geom_smooth(method="lm", size=0.5, color="blue")
 ```
 
 <!-- Challenge 4a answer end -->
@@ -101,7 +108,12 @@ Modify your solution above so that the points are now a different shape and are 
 <!-- Challenge 4b answer begin -->
 
 ```{r}
-# Your code goes here
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp, color = continent)) +
+  geom_point(alpha = 0.4) + 
+  scale_x_log10() +
+  geom_smooth(method="lm", size=0.8, se = FALSE) +
+  scale_color_manual(values = cbbPalette)
+
 ```
 
 <!-- Challenge 4b answer end -->
@@ -115,7 +127,13 @@ Modify your solution above so that the points are now a different shape and are 
 <!-- Challenge 5 answer begin -->
 
 ```{r}
-# your code goes here
+ggplot(data = gapminder, mapping = aes(x=continent, y=lifeExp, color = continent)) +
+  geom_boxplot() +
+  facet_wrap(~year) +
+  labs(y="Life Expectancy",
+       x = '') +
+  theme(axis.text.x=element_blank(),
+        axis.ticks.x=element_blank()) 
 ```
 
 <!-- Challenge 5 answer end -->

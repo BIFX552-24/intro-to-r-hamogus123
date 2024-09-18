@@ -30,7 +30,9 @@ Make a new column in the `gapminder` data frame that contains population in unit
 <!-- Challenge 1 answer begin -->
 
 ```{r}
-# your code goes here
+gapminder$pop_million <- gapminder$pop/1e6
+head(gapminder$pop_million)
+tail(gapminder$pop_million)
 ```
 
 <!-- Challenge 1 answer end -->
@@ -42,7 +44,11 @@ On a single graph, plot population, in millions, against year, for all countries
 <!-- Challenge 2a answer begin -->
 
 ```{r}
-# your code goes here
+ggplot(data = gapminder,  mapping = aes(x=year, y=pop_million)) +
+  geom_point() +
+  labs(x="Year",
+       y="Population (millions)") 
+  
 ```
 
 <!-- Challenge 2a answer end -->
@@ -54,7 +60,11 @@ Repeat the exercise, graphing only for China, India, and Indonesia. Again, do no
 <!-- Challenge 2b answer begin -->
 
 ```{r}
-# your code goes here
+gapminder[gapminder$country %in% c("China", "India", "Indonesia"), ] %>%
+ggplot(data = gapminder,  mapping = aes(x=year, y=pop_million)) +
+  geom_point() +
+  labs(x="Year",
+       y="Population (millions)") 
 ```
 
 <!-- Challenge 2b answer end -->
@@ -79,7 +89,10 @@ Did you get the output you expected? If not and the video didn't clear things up
 
 <!-- Challenge 3 answer begin -->
 
-Your answer goes here.
+-   `m ^ -1` divides the values by 1
+-   `m * c(1,0,-1)` row 1 is multiplied by 1, row 2 is multiplied by 0, and row 3 is multiplied by -1.
+-   `m * c(0,20)` will recycle the values on the right. This will return true or false for each comparision.
+-   `m *c(1,0,-1,2)` this will also recycle the values on the right. This will multiply each column by the numbers on the list.
 
 <!-- Challenge 3 answer end -->
 
@@ -96,7 +109,7 @@ This would be tedious to type out, and impossible for high values of $n$. Use ve
 <!-- Challenge 4a answer begin -->
 
 ```{r}
-# your code goes here
+sum(1/(1:100)^2)
 ```
 
 <!-- Challenge 4a answer end -->
@@ -108,7 +121,8 @@ What is the sum when $n=10,000$?
 <!-- Challenge 4b answer begin -->
 
 ```{r}
-# your code goes here
+n <- 10000
+sum(1/(1:n)^2)
 ```
 
 <!-- Challenge 4b answer end -->

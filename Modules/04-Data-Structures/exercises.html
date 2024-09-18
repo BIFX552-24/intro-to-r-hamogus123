@@ -241,10 +241,10 @@ Key Points
 </div>
 </div>
 <p>This line of code will return the first variable of cats as a character vector.</p>
-<pre class="{cats$coat}"><code></code></pre>
+<p><code>{cats$coat}</code></p>
 <p>This line of code will do the same thing as the double brackets meaning that it will return a character vector.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>cats[<span class="st">"coat"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>cats[<span class="st">"coat"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    coat
 1 calico
@@ -255,21 +255,21 @@ Key Points
 </div>
 <p>This line of code will do the same thing as the single brackets meaning that it will return a data frame with a single column of data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>cats[<span class="dv">1</span>, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>cats[<span class="dv">1</span>, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "calico"</code></pre>
 </div>
 </div>
 <p>This line of code will return the first observation of the first column.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>cats[, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>cats[, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "calico" "black"  "tabby"  "tabby" </code></pre>
 </div>
 </div>
 <p>This line of code will return a character vector of the first column for all observations.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>cats[<span class="dv">1</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>cats[<span class="dv">1</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    coat weight likes_string
 1 calico    2.1            1</code></pre>
@@ -282,7 +282,7 @@ Key Points
 <h4 class="anchored" data-anchor-id="challenge-6">Challenge 6</h4> <img src="score6.png">
 <p>Given <code>matrix_example</code>,</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>matrix_example <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">ncol=</span><span class="dv">6</span>, <span class="at">nrow=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>matrix_example <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">ncol=</span><span class="dv">6</span>, <span class="at">nrow=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>what do you think will be the result of <code>length(matrix_example)</code>? Try it. Were you right? Why / why not?</p>
 <p>The result of length(matrix_example) is 18, there are a total of 18 values in the matrix.</p>
@@ -295,8 +295,8 @@ Key Points
 <p>Make another matrix, this time containing the numbers 1:50, with 5 columns and 10 rows. Did the matrix function fill your matrix by column, or by row, as its default behavior? See if you can figure out how to change this. (hint: read the documentation for matrix!)</p>
 <!-- Challenge 7 answer begin -->
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using matrix with default `matrix` parameters</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="at">ncol=</span><span class="dv">5</span>, <span class="at">nrow=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using matrix with default `matrix` parameters</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="at">ncol=</span><span class="dv">5</span>, <span class="at">nrow=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      [,1] [,2] [,3] [,4] [,5]
  [1,]    1   11   21   31   41
@@ -310,8 +310,8 @@ Key Points
  [9,]    9   19   29   39   49
 [10,]   10   20   30   40   50</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># modify the previous command to fill in the opposite order as above</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="at">ncol=</span><span class="dv">5</span>, <span class="at">nrow=</span><span class="dv">10</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># modify the previous command to fill in the opposite order as above</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="at">ncol=</span><span class="dv">5</span>, <span class="at">nrow=</span><span class="dv">10</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      [,1] [,2] [,3] [,4] [,5]
  [1,]    1    2    3    4    5
@@ -338,8 +338,8 @@ Key Points
 <p>Populate each character vector with the names of the data types and data structures we’ve seen so far.</p>
 <!-- Challenge 8 answer begin -->
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(<span class="at">data_types =</span> <span class="fu">c</span>(<span class="st">"logical"</span>, <span class="st">"integer"</span>, <span class="st">"double"</span>, <span class="st">"complex"</span>, <span class="st">"character"</span>),</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">data_structure =</span> <span class="fu">c</span>(<span class="st">"vector"</span>, <span class="st">"list"</span>, <span class="st">"data.frame"</span>, <span class="st">"matrix"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(<span class="at">data_types =</span> <span class="fu">c</span>(<span class="st">"logical"</span>, <span class="st">"integer"</span>, <span class="st">"double"</span>, <span class="st">"complex"</span>, <span class="st">"character"</span>),</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">data_structure =</span> <span class="fu">c</span>(<span class="st">"vector"</span>, <span class="st">"list"</span>, <span class="st">"data.frame"</span>, <span class="st">"matrix"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$data_types
 [1] "logical"   "integer"   "double"    "complex"   "character"
@@ -366,7 +366,7 @@ $data_structure
 </ol>
 <!-- Challenge 9 answer begin -->
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">7</span>), <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">7</span>), <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2]
 [1,]    4    1
