@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Learning R</title>
+<title>Data frames with dplyr</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,19 +20,53 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="progress_files/libs/clipboard/clipboard.min.js"></script>
-<script src="progress_files/libs/quarto-html/quarto.js"></script>
-<script src="progress_files/libs/quarto-html/popper.min.js"></script>
-<script src="progress_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="progress_files/libs/quarto-html/anchor.min.js"></script>
-<link href="progress_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="progress_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="progress_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="progress_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="progress_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="exercises_files/libs/clipboard/clipboard.min.js"></script>
+<script src="exercises_files/libs/quarto-html/quarto.js"></script>
+<script src="exercises_files/libs/quarto-html/popper.min.js"></script>
+<script src="exercises_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="exercises_files/libs/quarto-html/anchor.min.js"></script>
+<link href="exercises_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="exercises_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="exercises_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="exercises_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="exercises_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -45,7 +79,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Learning R</h1>
+<h1 class="title">Data frames with dplyr</h1>
 </div>
 
 
@@ -62,84 +96,75 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<!-- This file is not intended to be edited -->
-<!-- Render this file to see automated progress updates on your exercises -->
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<p>You’ll want to install the following prior to starting this course:</p>
+<p>The exercises in this document follow along closely with <a href="https://swcarpentry.github.io/r-novice-gapminder/13-dplyr.html">Lesson 13</a> of <a href="https://swcarpentry.github.io/r-novice-gapminder/">R for Reproducible Scientific Analysis</a>, provided by the <a href="https://software-carpentry.org/">Software Carpentry</a> community under the creative commons license, <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>. For more information see <a href="https://carpentries.org/">The Carpentries</a>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Key Points
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
-<li><a href="https://posit.co/download/rstudio-desktop/">R and RStudio</a></li>
+<li>Use the <code>dplyr</code> package to manipulate data frames.</li>
+<li>Use <code>select()</code> to choose variables from a data frame.</li>
+<li>Use <code>filter()</code> to choose data based on values.</li>
+<li>Use <code>group_by()</code> and <code>summarize()</code> to work with subsets of data.</li>
+<li>Use <code>mutate()</code> to create new variables.</li>
 </ul>
-<p>On a related note, if you are a student (i.e.&nbsp;if you must have a ‘.edu’ email and a student ID card), you should check out the <a href="https://education.github.com/pack">GitHub Student Developer Pack</a>. It comes with all sorts of freebies and discounts for developer tools including things like training, GitHub Pro, JetBrains, Microsoft Azure, Codespaces, and GitKraken.</p>
-</section>
-<section id="your-progress" class="level2">
-<h2 class="anchored" data-anchor-id="your-progress">Your progress</h2>
+</div>
+</div>
+<section id="challenge-1" class="level4">
+<h4 class="anchored" data-anchor-id="challenge-1">Challenge 1</h4> <img src="score1.png">
+<p>Write a single command (which can span multiple lines and includes pipes) that will produce a data frame that has the African values for <code>lifeExp</code>, <code>country</code> and <code>year</code>, but not for other Continents. How many rows does your data frame have and why?</p>
+<!-- Challenge 1 answer begin -->
 <div class="cell">
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<colgroup>
-<col style="width: 45%">
-<col style="width: 54%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Lesson</th>
-<th style="text-align: center;">Score</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><a href="Modules/01-RStudio-Intro/exercises.html">01 RStudio Intro</a></td>
-<td style="text-align: center;"><a href="Modules/01-RStudio-Intro/"><img src="Modules/01-RStudio-Intro/score0.png"></a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><a href="Modules/02-Project-Intro/exercises.html">02 Project Intro</a></td>
-<td style="text-align: center;"><a href="Modules/02-Project-Intro/"><img src="Modules/02-Project-Intro/score0.png"></a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><a href="Modules/03-Seeking-Help/exercises.html">03 Seeking Help</a></td>
-<td style="text-align: center;"><a href="Modules/03-Seeking-Help/"><img src="Modules/03-Seeking-Help/score0.png"></a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><a href="Modules/04-Data-Structures/exercises.html">04 Data Structures</a></td>
-<td style="text-align: center;"><a href="Modules/04-Data-Structures/"><img src="Modules/04-Data-Structures/score0.png"></a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><a href="Modules/05-Exploring-Data-Frames/exercises.html">05 Exploring Data Frames</a></td>
-<td style="text-align: center;"><a href="Modules/05-Exploring-Data-Frames/"><img src="Modules/05-Exploring-Data-Frames/score0.png"></a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><a href="Modules/06-Subsetting-Data/exercises.html">06 Subsetting Data</a></td>
-<td style="text-align: center;"><a href="Modules/06-Subsetting-Data/"><img src="Modules/06-Subsetting-Data/score0.png"></a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><a href="Modules/07-Flow-Control/exercises.html">07 Flow Control</a></td>
-<td style="text-align: center;"><a href="Modules/07-Flow-Control/"><img src="Modules/07-Flow-Control/score0.png"></a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><a href="Modules/08-ggplot2/exercises.html">08 ggplot2</a></td>
-<td style="text-align: center;"><a href="Modules/08-ggplot2/"><img src="Modules/08-ggplot2/score0.png"></a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><a href="Modules/09-Vectorization/exercises.html">09 Vectorization</a></td>
-<td style="text-align: center;"><a href="Modules/09-Vectorization/"><img src="Modules/09-Vectorization/score0.png"></a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><a href="Modules/10-Functions/exercises.html">10 Functions</a></td>
-<td style="text-align: center;"><a href="Modules/10-Functions/"><img src="Modules/10-Functions/score0.png"></a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><a href="Modules/11-Writing-Data/exercises.html">11 Writing Data</a></td>
-<td style="text-align: center;"><a href="Modules/11-Writing-Data/"><img src="Modules/11-Writing-Data/score0.png"></a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><a href="Modules/12-dplyr/exercises.html">12 dplyr</a></td>
-<td style="text-align: center;"><a href="Modules/12-dplyr/"><img src="Modules/12-dplyr/score0.png"></a></td>
-</tr>
-</tbody>
-</table>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>gapminder_africa <span class="ot">&lt;-</span> <span class="fu">filter</span>(gapminder, continent <span class="sc">==</span> <span class="st">"Africa"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(lifeExp, country, year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The gapminder dataset contains 624 rows. This corresponds to 52 countries over 12 years.</p>
+<!-- Challenge 1 answer end -->
+</section>
+<section id="challenge-2" class="level4">
+<h4 class="anchored" data-anchor-id="challenge-2">Challenge 2</h4> <img src="score2.png">
+<p>Calculate the average life expectancy per country. Which has the longest average life expectancy and which has the shortest average life expectancy?</p>
+<!-- Challenge 2 answer begin -->
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>average_lifeExp <span class="ot">&lt;-</span> <span class="fu">group_by</span>(gapminder, country) <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_lifeExp =</span> <span class="fu">mean</span>(lifeExp)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The country that has the longest average life expectancy is Iceland, and and the country with shortest average life expectancy is Sierra Leone.</p>
+<!-- Challenge 2 answer end -->
+</section>
+<section id="challenge-3" class="level4">
+<h4 class="anchored" data-anchor-id="challenge-3">Challenge 3</h4> <img src="score3.png">
+<p>Calculate the average life expectancy in 2002 of 2 randomly selected countries for each continent. Then arrange the continent names in reverse order. <strong>Hint:</strong> Use the <code>dplyr</code> functions <code>arrange()</code> and <code>slice_sample()</code>, they have similar syntax to other dplyr functions.</p>
+<!-- Challenge 3 answer begin -->
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12374</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2002</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(continent) <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n=</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_lifeExp =</span> <span class="fu">mean</span>(lifeExp)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(continent))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  continent mean_lifeExp
+  &lt;fct&gt;            &lt;dbl&gt;
+1 Oceania           79.7
+2 Europe            78.3
+3 Asia              71.9
+4 Americas          71.8
+5 Africa            44.9</code></pre>
 </div>
 </div>
+<!-- Challenge 3 answer end -->
 </section>
 
 </main>
