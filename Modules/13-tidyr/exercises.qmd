@@ -32,6 +32,8 @@ Is gapminder a purely long, purely wide, or some intermediate format?
 
 <!-- Challenge 1 answer begin -->
 
+it is between wide and long.
+
 <!-- Challenge 1 answer end -->
 
 #### gap_wide vs gap_long vs gapminder
@@ -72,7 +74,10 @@ Using `gap_long`, calculate the mean life expectancy, population, and gdpPercap 
 <!-- Challenge 2 answer begin -->
 
 ```{r}
-# insert code here
+gap_long %>%
+  group_by(continent) %>%
+  summarize(mean_value = mean(obs_values)) %>%
+  ungroup()
 ```
 
 <!-- Challenge 2 answer end -->
@@ -84,7 +89,10 @@ Create a `gap_ludicrously_wide` format data by pivoting over countries, year and
 <!-- Challenge 3 answer begin -->
 
 ```{r}
-# insert code here
+gap_long %>%
+  unite(var_names, obstype,year,country) %>%
+  pivot_wider(names_from = var_names, values_from = obs_values)
+  
 ```
 
 <!-- Challenge 3 answer end -->
